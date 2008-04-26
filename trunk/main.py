@@ -26,9 +26,9 @@ class MainHandler(webapp.RequestHandler):
 		
 		ipaddr = os.environ['REMOTE_ADDR']
 		
-		if delete:
-			for e in cursorEvents:
-				e.delete()
+#		if delete:
+#			for e in cursorEvents:
+#				e.delete()
 
 		values = {
 			'cursorEvents': cursorEvents,
