@@ -1,0 +1,51 @@
+<html>
+<head>
+<title>CursorLog</title>
+<link rel="stylesheet" type="text/css" href="/assets/main.css" />
+<script type="text/javascript" src="/assets/mootools.js"></script>
+<script type="text/javascript">
+<!--
+var nolog = {{nolog}};
+-->
+</script>
+<script type="text/javascript" src="/assets/main.js"></script>
+</head>
+<body>
+<div id="header">
+<img src="/assets/cursorlog.png" width="58" height="96" alt="" />
+<h1>CursorLog <sup>beta</sup></h1>
+</div>
+<div id="content">
+<h2>Introduction</h2>
+<p>This site logs your cursor activity <strong>NOW</strong>. Be warned.</p>
+<p>Click the 'Play' link to replay cursor activity performed by others.</p>
+<p><a href="/">Reload this page</a> to view latest cursor movements.</p>
+<p>Powered by <a href="http://code.google.com/appengine/">Google App Engine</a>, <a href="http://mootools.net/">Mootools</a>, your cursor and <a href="http://twitter.com/cheeaun">mine</a> as well.</p>
+<h2>Information</h2>
+<ul>
+<li>Your IP address: <strong>{{ipaddr}}</strong></li>
+<li>Your Cursor position: <strong id="info-pos"></strong></li>
+</ul>
+</div>
+<div id="logs">
+<h2>Cursor Logs</h2>
+<table>
+<tr>
+<th>Time</th>
+<th>IP address</th>
+<th>Duration</th>
+<th>Play</th>
+</tr>
+{% for c in cursorEvents %}
+<tr id="tr-cursor-{{c.id}}">
+<td title="{{c.when|date:"g:i a jS F Y"}}">{{c.when|timesince}} ago</td>
+<td>{{c.ipaddr}}</td>
+<td>{{c.duration}} ms</td>
+<td><a href="#" id="play-{{c.id}}" class="play-link">Play</a> <img src="/assets/loader.gif" width="16" height="16" alt="" style="display: none;" /></td>
+</tr>
+{% endfor %}
+</table>
+<a href="#" id="clear">Clear inactive cursors</a>
+</div>
+</body>
+</html>
