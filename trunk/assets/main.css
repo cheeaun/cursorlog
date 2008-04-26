@@ -1,0 +1,73 @@
+body{
+	font-family: "lucida sans", lucida, helvetica, arial, sans-serif;
+	padding: 0;
+	margin: 0;
+	border: 0;
+	font-size: 11px;
+}
+
+table{
+	font-size: 1em;
+	width: 100%;
+	border: 0;
+	border-spacing: 0;
+	border-collapse: collapse;
+	margin: 0 0 1em;
+}
+
+th{
+	border-bottom: 3px double #ccc;
+	padding: .3em;
+	text-align: left;
+}
+
+td{
+	border-bottom: 1px solid #ccc;
+	padding: .3em;
+}
+
+ul{
+	margin: 0;
+	padding: 0;
+}
+
+li{
+	margin: 0;
+	padding: .1em;
+}
+
+#header{
+	position: absolute;
+	z-index: 2;
+	width: 100px;
+	top: 20px;
+	left: 20px;
+}
+
+#content{
+	position: absolute;
+	z-index: 2;
+	width: 140px;
+	top: 20px;
+	left: 160px;
+}
+
+#logs{
+	position: absolute;
+	z-index: 2;
+	width: 400px;
+	top: 20px;
+	left: 340px;
+}
+
+.cursor{
+	width: 12px;
+	height: 19px;
+	position: absolute;
+	color: inherit;
+	background: transparent url(cursor.png) no-repeat;
+}
+
+.cursor.down{
+	background-position: -12px 0;
+}
