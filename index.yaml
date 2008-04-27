@@ -10,7 +10,7 @@ indexes:
 # automatically uploaded to the admin console when you next deploy
 # your application using appcfg.py.
 
-# Used 659 times in query history.
+# Used 663 times in query history.
 - kind: CursorEvents
   properties:
   - name: when
