@@ -63,24 +63,22 @@ window.addEvent('domready', function(){
 		}
 	}
 	
-	window.addEvent('unload', storeCursorEvents);
-/*	window.addEvent('unload', function(){
-		alert('unload');
+	window.addEvents({
+		'unload': storeCursorEvents,
+		'beforeunload': function(){
+			storeCursorEvents();
+			if(cursorEvents.length) alert('Storing your cursor activity... Thanks!');
+		}
 	});
-	window.addEvent('beforeunload', function(){
-		alert('beforeunload');
-	});
-*/
+	
 	function storeCursorEvents() {
 		if(cursorEvents.length) {
 			var jsonce = JSON.encode(cursorEvents);
-			var e = new Request({
-				url: '/',
-				method: 'post'
+			var e = new Request({ url: '/', method: 'post', onSuccess: function(){
+					cursorEvents.empty();
+					duration = timer = 0;
+				}
 			}).post({'e': jsonce, 'd': duration});
-			
-			cursorEvents.empty();
-			duration = timer = 0;
 		}
 	}
 	
@@ -88,9 +86,7 @@ window.addEvent('domready', function(){
 		e = new Event(e).stop();
 		var id = this.id.split('-').slice(1);
 		
-		var cp = new Request.JSON({
-			url: '/play',
-			onComplete: function(e){
+		var cp = new Request.JSON({ url: '/play', onComplete: function(e){
 				playEvent(e, id);
 			}
 		}).get({'id':id});
@@ -114,7 +110,7 @@ window.addEvent('domready', function(){
 
 		if(!cursor) cursor = new Element('div', {
 			'id': 'cursor-'+id,
-			'class': 'cursor',
+			'class': 'cursor'
 		}).inject(document.body);
 		
 		// running cursor?
@@ -151,17 +147,10 @@ window.addEvent('domready', function(){
 						'duration': nexte[3],
 						onComplete: function() {
 							switch(e0) {
-								case 'd':
-									cursor.addClass('down');
-									break;
-								case 'u':
-									cursor.removeClass('down');
-									break;
-								case 'l':
-									cursor.setStyle('opacity','.3');
-									break;
-								case 'm': 
-									break;
+								case 'd': cursor.addClass('down'); break;
+								case 'u': cursor.removeClass('down'); break;
+								case 'l': cursor.setStyle('opacity','.3'); break;
+								case 'm': cursor.setStyle('opacity','1'); break;
 							}
 						}.bind(e0)
 					});
