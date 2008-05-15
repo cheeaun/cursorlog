@@ -63,13 +63,14 @@ window.addEvent('domready', function(){
 		}
 	}
 	
-	window.addEvents({
-		'unload': storeCursorEvents,
-		'beforeunload': function(){
-			storeCursorEvents();
-			if(cursorEvents.length) alert('Storing your cursor activity... Thanks!');
-		}
+	window.addEvent('unload', storeCursorEvents);
+	
+	/*
+	window.addEvent('beforeunload', function(){
+		storeCursorEvents();
+		if(cursorEvents.length) alert('Storing your cursor activity... Thanks!');
 	});
+	*/
 	
 	function storeCursorEvents() {
 		if(cursorEvents.length) {
